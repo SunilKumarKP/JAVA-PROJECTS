@@ -1,0 +1,59 @@
+package com.org;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+public class JwtGenerator {
+
+    // The JWT signature algorithm we will be using to sign the token
+    private static final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+    private String createJWT(String id, String issuer, String subject, long expirationTime) {
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+
+        // Sign JWT with our ApiKey secret i.e. SecretKey.
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("SecretKey");
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+        JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now).setSubject(subject).setIssuer(issuer).signWith(signatureAlgorithm, signingKey);
+
+        // if expirationTime specified, let's add the expiration time to current time
+        if (expirationTime >= 0) {
+            long expMillis = nowMillis + expirationTime;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }
+        // Builds the JWT and serializes it to a compact, URL-safe string
+        return builder.compact();
+    }
+
+    public static String generateJwt() {
+        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        HashMap<String, String> subject = new HashMap<>();
+        subject.put("name", "sunil");
+
+        String jws = Jwts.builder().setAudience("LocalAuthenticatior").compact();
+        System.out.println("jws==>" + jws);
+        return jws;
+    }
+
+    public static String parseJwt() {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        JwtGenerator jwtg = new JwtGenerator();
+        jwtg.generateJwt();
+    }
+}

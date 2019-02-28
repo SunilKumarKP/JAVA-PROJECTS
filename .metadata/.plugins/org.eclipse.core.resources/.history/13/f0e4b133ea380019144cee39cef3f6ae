@@ -1,0 +1,12 @@
+package com.org.programming;
+
+public class StringAnagram {
+
+    public static boolean isAnagram(String word, String anagram) {
+        if (word.length() != anagram.length()) {
+            return false;
+        }
+        return true;
+    }
+
+}

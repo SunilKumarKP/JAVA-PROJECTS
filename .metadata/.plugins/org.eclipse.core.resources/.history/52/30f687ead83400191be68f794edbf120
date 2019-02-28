@@ -1,0 +1,5 @@
+package com.org.pattern.facade;
+
+public class Client {
+
+}

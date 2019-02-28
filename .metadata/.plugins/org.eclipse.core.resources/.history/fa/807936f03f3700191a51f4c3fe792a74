@@ -1,0 +1,64 @@
+package com.org;
+
+import java.security.Key;
+import java.util.Date;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+public class JwtGenerator {
+
+    // The JWT signature algorithm we will be using to sign the token
+    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+    private final String SECRET_KEY = "SecretKey";
+
+    /**
+     * Use to generate the JWT token.
+     * 
+     * @param id client id for the JWT
+     * @param issuer of the JWT
+     * @param subject of the JWT
+     * @param expirationTime of JWT
+     * @return
+     */
+    private String createJWT(String id, String issuer, String subject, long expirationTime) {
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+
+        // Sign JWT with our ApiKey secret i.e. SecretKey.
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+        JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now).setSubject(subject).setIssuer(issuer).signWith(key);
+
+        // if expirationTime specified, let's add the expiration time to current time
+        if (expirationTime >= 0) {
+            long expMillis = nowMillis + expirationTime;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }
+        // Builds the JWT and serializes it to a compact, URL-safe string
+        return builder.compact();
+    }
+
+
+    public void parseJwt(String jwt) {
+        Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY)).parseClaimsJws(jwt).getBody();
+        System.out.println("ID: " + claims.getId());
+        System.out.println("Subject: " + claims.getSubject());
+        System.out.println("Issuer: " + claims.getIssuer());
+        System.out.println("Expiration: " + claims.getExpiration());
+    }
+
+    public static void main(String[] args) {
+        JwtGenerator jwtG = new JwtGenerator();
+        String s = jwtG.createJWT("JWTExample", "JWTAuthentication", "Sunil", 100000L);
+        System.out.println("Signed JWT ==>" + s);
+    }
+}

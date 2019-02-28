@@ -1,0 +1,19 @@
+package com.org;
+
+public class ThreadRun {
+    public static void main(String[] args) {
+        Runnable r = ()-> {            
+            System.out.println("value==");
+        };
+        
+        Runnable r1 = ()-> {            
+            System.out.println("value==");
+        };
+        
+        Thread t1 = new Thread(r);
+        Thread t2 = new Thread(r1);
+        t1.start();
+        t2.start();
+    }
+
+}

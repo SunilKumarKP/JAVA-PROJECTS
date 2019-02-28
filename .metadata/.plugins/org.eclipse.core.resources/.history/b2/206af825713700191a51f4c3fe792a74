@@ -1,0 +1,5 @@
+package com.org.restful.webservice;
+
+public class MyService {
+
+}

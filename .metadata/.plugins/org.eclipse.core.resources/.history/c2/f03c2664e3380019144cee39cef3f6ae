@@ -1,0 +1,19 @@
+package com.org.programming;
+
+public class StringReverse {
+
+    public static String reverse(String source) {
+        if(source==null||source.isEmpty()){
+            return source;
+        }
+        String reverse ="";
+        for(int i=source.length()-1;i>=0;i--){
+            reverse+=source.charAt(i);
+        }
+     return source;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(reverse("ABCD"));
+    }
+}

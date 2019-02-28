@@ -1,0 +1,17 @@
+package com.org;
+
+import java.security.Key;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+public class JwtGenerator {
+
+    public static String generateJwt() {
+        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+        String jws = Jwts.builder().setSubject("Sunil").signWith(key).compact();
+        return jws;
+    }
+}

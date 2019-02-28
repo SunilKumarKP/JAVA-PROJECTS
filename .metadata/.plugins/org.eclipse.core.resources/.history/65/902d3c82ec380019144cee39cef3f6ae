@@ -1,0 +1,18 @@
+package com.org.programming;
+
+public class StringPermutation {
+    public static void main(String[] args) {
+
+    }
+
+    public static void permutation(String word) {
+        permutation("", word);
+    }
+
+    private static void permutation(String perm, String word) {
+        // TODO Auto-generated method stub
+        if (word.isEmpty()) {
+            System.err.println(perm + word);
+        }
+    }
+}

@@ -1,0 +1,5 @@
+package com.org.statergy;
+
+public class PayStrategy {
+
+}

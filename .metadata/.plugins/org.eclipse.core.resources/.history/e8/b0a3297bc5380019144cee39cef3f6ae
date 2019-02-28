@@ -1,0 +1,35 @@
+package com.org;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class FileChannelDemo {
+
+    public static void main(String args[]) {
+        Tablet ipad = new Tablet("Apple", true, 1000);
+        System.out.println("Writing into RandomAcessFile : " + ipad);
+        write("tablet.store", ipad);
+        Tablet fromStore = new Tablet();
+        read("tablet.store", fromStore);
+        System.out.println("Object read from RandomAcessFile : " + fromStore);
+    }
+
+    /* * Method to write data into File using FileChannel and ByteBuffeer */
+    public static void write(String filename, Persistable object) {
+        try{
+            
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            
+        }
+    }
+}
+
+class Tablet {
+    private String name;
+
+    public Tablet() {
+
+    }
+}

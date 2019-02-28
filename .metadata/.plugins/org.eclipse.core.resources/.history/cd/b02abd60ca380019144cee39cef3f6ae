@@ -1,0 +1,51 @@
+package com.org;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
+public class FileChannelDemo {
+
+    public static void main(String args[]) {
+        Tablet ipad = new Tablet("Apple", true, 1000);
+        System.out.println("Writing into RandomAcessFile : " + ipad);
+        write("tablet.store", ipad);
+        Tablet fromStore = new Tablet();
+        read("tablet.store", fromStore);
+        System.out.println("Object read from RandomAcessFile : " + fromStore);
+    }
+
+    /* * Method to write data into File using FileChannel and ByteBuffeer */
+    public static void write(String filename, Persistable object) {
+        try{
+            // Creating RandomAccessFile for writing
+            RandomAccessFile store = new RandomAccessFile("tablet", "rw");
+            FileChannel channel = store.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(2048);
+            object.persist(buffer);
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Tablet implements Persistable {
+    private String name;
+    private boolean available;
+    private int count;
+
+    public Tablet(String name, boolean available, int count) {
+
+    }
+}
+
+interface Persistable {
+    public void persist(ByteBuffer buffer);
+
+    public void recover(ByteBuffer buffer);
+}

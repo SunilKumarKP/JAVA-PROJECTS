@@ -1,0 +1,59 @@
+package com.org;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class IteratorExample {
+
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        // iterateUsingIterator(numbers);
+        // iterateUsingForLoop(numbers);
+        // iterateUsingForEachLoop(numbers);
+        iterateUsingStreamForEachLoop(numbers);
+        System.out.println("numbers==" + numbers);
+    }
+
+    // Does not Throws Concurrent Modification exception
+    static void iterateUsingIterator(List<Integer> numbers) {
+        Iterator<Integer> numIterator = numbers.iterator();
+        while (numIterator.hasNext()) {
+            System.out.println("Value==>" + numIterator.next());
+            numIterator.remove();
+        }
+    }
+
+    // Throws Concurrent Modification exception
+    static void iterateUsingForLoop(List<Integer> numbers) {
+        for (Integer i : numbers) {
+            System.out.println("Value==>" + i);
+            numbers.remove(i);
+        }
+    }
+
+    // Throws Concurrent Modification exception
+    static void iterateUsingForEachLoop(List<Integer> numbers) {
+        numbers.forEach((i) -> {
+            numbers.remove(i);
+        });
+    }
+
+    // Throws Concurrent Modification exception
+    static void iterateUsingStreamForEachLoop(List<Integer> numbers) {
+        numbers.stream().forEach((i) -> {
+            numbers.remove(i);
+        });
+    }
+    
+ // Throws Concurrent Modification exception
+    static void iterateUsingParallelStreamForEachLoop(List<Integer> numbers) {
+        numbers.parallelStream().forEach((i) -> {
+            numbers.remove(i);
+        });
+    }
+}

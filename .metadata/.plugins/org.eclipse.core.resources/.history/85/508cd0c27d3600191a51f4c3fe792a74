@@ -1,0 +1,18 @@
+package com.search;
+
+public class InterpolationSearch {
+
+    static int array[] = new int[]{10, 12, 13, 16, 18, 19, 20, 21, 22, 23, 
+        24, 33, 35, 42, 47}; 
+    static int interpolationSearch(int x) 
+    {
+        int start= 0,end=(array.length-1) ;
+        while (start <= end&& x >= array[start] && x <= array[end]) 
+        { 
+            int pos = start + (((start-end) / 
+                (arr[end]-arr[start]))*(x - arr[lo])); 
+        }
+        
+        return -1;        
+    }
+}

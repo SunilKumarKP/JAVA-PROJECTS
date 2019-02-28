@@ -1,0 +1,11 @@
+package com.org.programming;
+
+public class StringPermutation {
+    public static void main(String[] args) {
+
+    }
+
+    public static void permutation(String input) {
+        permutation("123");
+    }
+}

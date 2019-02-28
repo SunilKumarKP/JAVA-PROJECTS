@@ -1,0 +1,29 @@
+package com.org;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Test {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("test1", 12, "test1 place"));
+        employees.add(new Employee("test2", 13, "test1 place"));
+        employees.add(new Employee("test3", 14, "test1 place"));
+        employees.add(new Employee("test4", 15, "test1 place"));
+        System.out.println("before sort using comparabel");
+        employees.forEach(e -> {
+            System.out.println("Name==" + e.getName());
+        });
+        Collections.sort(employees);
+        System.out.println("After sort using comparabel");
+        employees.forEach(e -> {
+            System.out.println("Name==" + e.getName());
+        });
+    }
+}

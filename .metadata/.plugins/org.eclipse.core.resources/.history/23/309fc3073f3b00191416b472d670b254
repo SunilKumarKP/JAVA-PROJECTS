@@ -1,0 +1,37 @@
+package com.org;
+
+import com.org.Child.ChildException;
+import com.org.Child.ParentException;
+
+public class PolymorphismException {
+
+}
+
+class Parent {
+
+    public void m1() throws ParentException {
+    }
+
+    public void m2() throws ParentException {
+    }
+
+    public void m3() throws ChildException {
+    }
+}
+
+class Child extends Parent {
+    public void m1() throws ParentException {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void m2() throws ChildException {}
+
+    public void m3() throws ChildException {
+}
+
+class ParentException extends Exception {
+
+}
+
+class ChildException extends ParentException {}

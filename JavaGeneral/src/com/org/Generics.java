@@ -1,0 +1,15 @@
+package com.org;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Generics {
+    public static void main(String[] args) {
+        List<? extends Parent> allChild = new ArrayList<>();
+        Parent c = allChild.get(0);
+        List<? super Child> allParent = new ArrayList<>();
+        allParent.add(new Child());
+        Child c1 = (Child) allParent.get(0);
+    }
+
+}

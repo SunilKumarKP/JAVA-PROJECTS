@@ -1,0 +1,30 @@
+package com.org;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
+public class ExecutorServiceExample {
+    public static void main(String[] args) {
+        Runnable r = () -> System.out.println("HI r-->");
+        Runnable r1 = () -> System.out.println("HI r1-->");
+        Runnable r2 = () -> System.out.println("HI r2-->");
+        Runnable r3 = () -> System.out.println("HI r3-->");
+        Runnable r4 = () -> System.out.println("HI r4-->");
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.submit(r);
+        service.submit(r1);
+        service.submit(r2);
+        service.submit(r3);
+        service.submit(r4);
+        if (service instanceof ThreadPoolExecutor) {
+            System.out.println("Active Count==>" + ((ThreadPoolExecutor) service).getActiveCount());
+            System.out.println("Core pool size==>" + ((ThreadPoolExecutor) service).getCorePoolSize());
+            System.out.println("Max pool size==>" + ((ThreadPoolExecutor) service).getMaximumPoolSize());
+
+        }
+
+        // Callable<Object> c = Executors.callable(r);
+    }
+
+}

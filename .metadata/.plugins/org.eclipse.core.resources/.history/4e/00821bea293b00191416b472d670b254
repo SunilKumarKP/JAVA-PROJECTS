@@ -1,0 +1,12 @@
+package com.org;
+
+public class StringExample {
+
+    public static void main(String[] args) {
+        String s = "abc";
+        String s1 = new String("xyz");
+        if ((s1.intern() + s) == (s1.concat(s))) {
+            System.out.println("Yes equals");
+        }
+    }
+}

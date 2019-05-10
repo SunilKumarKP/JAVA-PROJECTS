@@ -16,23 +16,41 @@ public class User {
     private String uuid;
     private String address;
 
-    public User(int id, String name) {
-        this.id = id;
-        this.name = name;
+    private User(UserBuilder userBuilder) {
+        this.id = userBuilder.id;
+        this.name = userBuilder.name;
+        this.uuid = userBuilder.uuid;
+        this.address = userBuilder.address;
     }
 
-    public User setUuid(String uuid) {
-        this.uuid = uuid;
-        return this;
-    }
+    public static class UserBuilder {
+     // Mandatory pattern
+        private int id;
+        private String name;
 
-    public User setAddress(String address) {
-        this.address = address;
-        return this;
-    }
+        // Optional Parameters
+        private String uuid;
+        private String address;
 
-    public User build() {
-        return this;
+        public UserBuilder(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public UserBuilder withUuid(String uuid) {
+            this.uuid = uuid;
+            return this;
+        }
+
+        public UserBuilder withAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+
     }
 
     @Override

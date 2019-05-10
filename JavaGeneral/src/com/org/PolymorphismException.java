@@ -19,7 +19,6 @@ class Parent {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }
 
@@ -47,3 +46,5 @@ class ParentException extends Exception {
 
 class ChildException extends ParentException {
 }
+
+

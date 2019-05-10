@@ -44,7 +44,7 @@ static class Buffer {
                 value++;
                 // notify the consumer
                 notify();
-                Thread.sleep(1000);
+                    Thread.sleep(1000);
             }
         }
     }
@@ -59,7 +59,7 @@ static class Buffer {
                 System.out.println("Consume " + value);
                 // notify the producer
                 notify();
-                Thread.sleep(1000);
+                    Thread.sleep(1000);
             }
         }
     }

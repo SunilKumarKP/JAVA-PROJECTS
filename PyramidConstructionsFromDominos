@@ -1,0 +1,47 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+import java.util.*;
+class Solution {
+    public String solution(int[] A) {
+        // write your code in Java SE 8
+        if(isPossibelToCreatePyramid(A)){
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+
+    // Assuming that input array can contain maximum of 12 elements
+    static boolean isPossibelToCreatePyramid(int[] A){
+        Map<Integer,Integer> map =  new HashMap<>();
+        for(int a: A) {
+            if(map.containsKey(a)){
+                int val = map.get(a);
+                map.put(a,val+1);
+            } else {
+                map.put(a,1);
+            }
+        }
+        Map<Integer,Integer> result =  new HashMap<>();
+        for(Map.Entry<Integer,Integer> entry: map.entrySet()) {
+            if(result.containsKey(entry.getValue())){
+                int count = result.get(entry.getValue());
+                result.put(entry.getValue(),count+1);
+            } else {
+                result.put(entry.getValue(),1);
+            }
+        }
+
+        boolean isPyramidPossible = true;
+        for(Map.Entry<Integer,Integer> entry: result.entrySet()) {
+            if(entry.getValue()!=2){
+                isPyramidPossible =false;
+            }
+        }
+        return isPyramidPossible;
+    }
+}
